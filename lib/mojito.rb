@@ -19,7 +19,6 @@ module Mojito
 		Class.new.tap do |cl|
 			cl.instance_exec do
 				include Mojito
-				include Mojito::Matchers::Path
 				helpers.each do |helper|
 					include helper
 				end
@@ -74,15 +73,17 @@ module Mojito
 	def on(*matchers, &block)
 		env_backup = env.dup
 		param_size = captures.length
-		return unless matchers.all? {|m| __match(m) }
+		return unless matchers.all? {|m| __match?(m) }
 		params = captures[param_size..-1][0..block.arity]
 		instance_exec *params, &block
 	ensure
 		@__env = env_backup
 	end
 	
-	def __match(matcher)
+	def __match?(matcher)
 		case matcher
+		when String, Regexp
+			instance_exec &M::Matchers.path(matcher)
 		when Proc
 			instance_exec &matcher
 		else

@@ -62,4 +62,8 @@ module Mojito::Matchers
 	include Path
 	include VirtualHost
 	
+	extend Methods
+	extend Path
+	extend VirtualHost
+	
 end
