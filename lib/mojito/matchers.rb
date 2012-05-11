@@ -29,25 +29,29 @@ module Mojito::Matchers
 	module Path
 		
 		def path(pattern)
-			proc do
-				case pattern
-				when String
-					__consume_path(pattern.gsub(%r{/?:\?\w+}) {|name| "(?:/(?<#{name[2..-1]}>[^/]+))?" }.gsub(%r{:\w+}) {|name| "(?<#{name[1..-1]}>[^/]+)" })
-				when Regexp
-					__consume_path(pattern)
+			consume_path = proc do |pattern|
+				if match = path_info.match(%r<\A/#{pattern}(?=/|\z)>)
+					env['SCRIPT_NAME'] = match.to_s
+					env['PATH_INFO'] = match.post_match
+					locals.update match.names.inject({}) {|hash, name| hash[name.to_sym] = match[name] ; hash }
+					captures.push *match.captures
+					true
 				else
 					false
 				end
 			end
-		end
-		
-		def __consume_path(pattern)
-			return unless match = path_info.match(%r<\A/#{pattern}(?=/|\z)>)
-			env['SCRIPT_NAME'] = match.to_s
-			env['PATH_INFO'] = match.post_match
-			locals.update match.names.inject({}) {|hash, name| hash[name.to_sym] = match[name] ; hash }
-			captures.push *match.captures
-			true
+			proc do
+				if p = case pattern
+					when String
+						pattern.gsub(%r{/?:\?\w+}) {|name| "(?:/(?<#{name[2..-1]}>[^/]+))?" }.gsub(%r{:\w+}) {|name| "(?<#{name[1..-1]}>[^/]+)" }
+					when Regexp
+						pattern
+					end
+					instance_exec p,  &consume_path
+				else
+					false
+				end
+			end
 		end
 		
 	end

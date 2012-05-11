@@ -83,7 +83,7 @@ module Mojito
 	def __match?(matcher)
 		case matcher
 		when String, Regexp
-			instance_exec &M::Matchers.path(matcher)
+			instance_exec &path(matcher)
 		when Proc
 			instance_exec &matcher
 		else
