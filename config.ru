@@ -4,7 +4,7 @@ require 'mojito'
 
 M = Mojito
 
-TestApp = M::application M::R, M::M, M::H::ExceptionHandling do
+TestApp = M::application M::Rendering, M::Matchers, M::Helpers::ExceptionHandling do
 	on path('hello/:name') do |name|
 		write "Hello #{name}!"
 		content_type :plain
