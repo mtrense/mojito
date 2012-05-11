@@ -1,6 +1,7 @@
 = mojito - Next level ruby webframework
 
-As the name implies mojito derives from cuba (https://github.com/soveran/cuba). Many thanks to Michel and his code for 
+Mojito is a lean and simple webframework. 
+As the name implies mojito derives from cuba (https://github.com/soveran/cuba). Many thanks to Michel and the cuba for 
 giving me some major insights on web-application-simplicity!
 
 == Contributing to mojito
