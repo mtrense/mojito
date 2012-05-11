@@ -30,6 +30,9 @@ pkg
 #
 #.DS_Store
 
+.project
+.buildpath
+
 # For TextMate
 #*.tmproj
 #tmtags

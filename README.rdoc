@@ -1,6 +1,7 @@
-= mojito
+= mojito - Next level ruby webframework
 
-Description goes here.
+As the name implies mojito derives from cuba (https://github.com/soveran/cuba). Many thanks to Michel and his code for 
+giving me some major insights on web-application-simplicity!
 
 == Contributing to mojito
  
@@ -14,6 +15,5 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2012 Max Trense. See LICENSE.txt for
-further details.
+Copyright (c) 2012 Max Trense. See LICENSE.txt for further details.
 
