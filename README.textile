@@ -36,6 +36,14 @@ Hello Fred! How are you?
 
 p. Please be aware that although this way is easy to start with it tends to messy very quick if your project becomes more complex, so please read on...
 
+h2. Designing a real application
+
+p. tbd
+
+h2. Deployment
+
+p. tbd
+
 h2. Contributing to mojito
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
