@@ -5,7 +5,8 @@ describe Mojito do
   
 	context do
 		subject { Mojito.application {} }
-		it { subject.ancestors.should include(Mojito) }
+		it { subject.ancestors.should include(Mojito::Base) }
+		it { subject.should respond_to(:call) }
 	end
 	
 	context do
