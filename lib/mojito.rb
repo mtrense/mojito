@@ -20,6 +20,19 @@ module Mojito
 		end
 	end
 	
+	def self.base_application(*helpers, &block)
+		Class.new.tap do |cl|
+			cl.instance_exec do
+				include Mojito::Base
+				helpers.reverse.each do |helper|
+					include helper
+					extend helper::ClassMethods if helper.const_defined? :ClassMethods
+				end
+			end
+			cl.routes &block if block
+		end		
+	end
+	
 	def self.application(*helpers, &block)
 		Class.new.tap do |cl|
 			cl.instance_exec do
