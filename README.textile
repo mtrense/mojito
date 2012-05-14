@@ -57,13 +57,17 @@ h2. Behind the scenes
 
 p. Understanding how Mojito dispatches requests and selects handlers, which in turn use common functionality to create the response is vital to an efficient use of Mojito as web application framework. First of all Mojito applications (classes which include @Mojito::Base@ or @Mojito@) are simply Ruby classes, which are instantiated with the Rack-environment hash for each request. This is automatically triggered by a rack-enabled webserver through the call of @run ApplicationClass@, which tells rack to call @call(env)@ on that class. The Mojito implementation will then instantiate the Application (the instance is called a _controller_ from now on) and call @dispatch@ on that controller. The dispatch method then executes any block given to the @routes@-method in the class definition. As in Cuba the routes-definition is executed once for each request.
 
-h3. Matchers
+h3. Matching
 
-h3. Renderers
+h3. Rendering
 
 h3. Helpers
 
 h2. Deployment/Hosting
+
+p. tbd
+
+h2. Writing extensions
 
 p. tbd
 
