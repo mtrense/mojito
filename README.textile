@@ -2,7 +2,7 @@ h1. mojito - Next level ruby webframework
 
 p. Mojito is a lean and simple webframework. 
 
-p. As the name implies mojito derives from cuba (https://github.com/soveran/cuba). Many thanks to Michel and the cuba sources for giving me some major insights on web-application-simplicity!
+p. As the name implies mojito is Cuba-born (https://github.com/soveran/cuba). Many thanks to Michel and the cuba sources for giving me some major insights on web-application-simplicity!
 
 h2. Installing
 
