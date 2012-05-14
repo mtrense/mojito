@@ -25,7 +25,7 @@ end
 
 run FirstApp
 
-p. This installs a handler for GET requests to a path of /hello/ followed by a name (actually this notation catches all but a slash '/'). You can start this application by running @rackup@ from the same directory:
+p. This installs a handler for GET requests to a path of /hello/ followed by a name (actually this notation catches everything but a slash '/'). You can start this application by running @rackup@ from the same directory:
 
 bc. $ rackup
 
