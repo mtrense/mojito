@@ -1,12 +1,43 @@
 h1. mojito - Next level ruby webframework
 
-Mojito is a lean and simple webframework. 
-As the name implies mojito derives from cuba (https://github.com/soveran/cuba). Many thanks to Michel and the cuba for 
+p. Mojito is a lean and simple webframework. 
+
+p. As the name implies mojito derives from cuba (https://github.com/soveran/cuba). Many thanks to Michel and the cuba for 
 giving me some major insights on web-application-simplicity!
 
-h2. Your first controller
+h2. Installing
 
+bc. $ gem install mojito
 
+h2. Your first application
+
+p. The easiest way to start with mojito is to use a plain config.ru script to develop and configure your application. 
+
+bc.. $ cat config.ru
+require 'mojito'
+
+FirstApp = Mojito.application do
+	on GET(), PATH('/hello/:name') do |name|
+		write "Hello #{name}! How are you?"
+		content_type :plain
+		ok!
+	end
+end
+
+run FirstApp
+
+p. This installs a handler for GET requests to a path of /hello/ followed by a name (actually this notation catches all 
+but a slash '/'). You can start this application by running @rackup@ from the same directory:
+
+bc. $ rackup
+
+p. This starts a http-server on port 9292. Now try to call your handler through curl:
+
+bc. $ curl http://localhost:9292/hello/Fred
+Hello Fred! How are you?
+
+p. Please be aware that although this way is easy to start with it tends to messy very quick if your project becomes 
+more complex, so please read on...
 
 h2. Contributing to mojito
  
@@ -20,5 +51,5 @@ h2. Contributing to mojito
 
 h2. Copyright
 
-Copyright (c) 2012 Max Trense. See LICENSE.txt for further details.
+p. Copyright (c) 2012 Max Trense. See LICENSE.txt for further details.
 
