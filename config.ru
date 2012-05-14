@@ -2,17 +2,30 @@
 
 require 'mojito'
 
-M = Mojito
+use Rack::ShowExceptions
 
-TestApp = M::application M::Rendering, M::Matchers, M::Helpers::ExceptionHandling do
-	on path('hello/:name') do |name|
-		write "Hello #{name}!"
-		content_type :plain
-		ok!
+class TestApp	
+	include	Mojito
+	
+	routes do
+		on PATH('hello/:name') do |name|
+			write "Hello #{name}!"
+			content_type :plain
+			ok!
+		end
+		on GET() do
+			on 'exception' do
+				raise 503
+			end
+			redirect! '/hello/Type+your+name+here'
+		end
 	end
-	on get do
-		redirect! '/hello/Type+your+name+here'
+	
+	on_error 503 do
+		write "Sorry we're down this time."
+		unavailable!
 	end
+	
 end
 
 run TestApp
