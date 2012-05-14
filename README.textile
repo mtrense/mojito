@@ -1,4 +1,4 @@
-h1. mojito - Next level ruby webframework
+h1. mojito - Next level Ruby webframework
 
 p. Mojito is a lean and simple webframework. 
 
@@ -38,12 +38,12 @@ p. Please be aware that although this way is easy to start with it tends to get 
 
 h2. Structure of a real-world application
 
-p. The above call to @Mojito.application@ actually created a class and included most of Mojitos foundation methods, so that you could start writing your application code without wondering what features you want to include in your application. As a tribute to simplicity (one of the most important I think), another helper method @Mojito.base_application@ can be used to create a blank application class, which only includes modules that are strictly necessary. Instead of using those methods you can also write out all of the generated classes code:
+p. The above call to @Mojito.application@ actually created a class and included most of Mojitos foundation methods, so that you could start writing your application code without wondering what features you want to include in your application. As a tribute to simplicity (one of the most important I think), another helper method @Mojito.base_application@ can be used to create a blank application class, which only includes modules that are strictly necessary. Instead of using those methods you can also write out all of the generated classes code (here @Mojito@ is included, which in turn includes @Mojito::Base@, the basic module which is used by @Mojito.base_application@):
 
 bc.. class FirstApp
 	include Mojito
 	routes do
-		on GET(), PATH('/hello/:name' do |name|
+		on GET(), PATH('/hello/:name') do |name|
 			...
 		end
 	end
@@ -51,11 +51,11 @@ end
 
 p. which is not only perfectly legal but also favoured, when you need any special behaviour on your application class.
 
-p. Although you can actually use any structure you want (including a single-file application), some of them are more useful than others. My preferred way of developing Mojito applications is to reuse most of the concepts found in production development with rubygems and git.
+p. Although you can actually use any structure you want (including a single-file application), some of them are more useful than others. My preferred way of developing Mojito applications is to reuse most of the concepts found in product development with rubygems and git.
 
 h2. Behind the scenes
 
-p. tbd
+p. Understanding how Mojito dispatches requests and selects handlers, which in turn use common functionality to create the response is vital to an efficient use of Mojito as web application framework. First of all Mojito applications (classes which include @Mojito::Base@ or @Mojito@) are simply Ruby classes, which are instantiated with the Rack-environment hash for each request. 
 
 h3. Matchers
 
