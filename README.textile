@@ -10,7 +10,7 @@ bc. $ gem install mojito
 
 h2. Your first application
 
-p. The easiest way to start with mojito is to use a plain config.ru script to develop and configure your application. 
+p. The easiest way to start with mojito is to use a plain @config.ru@ script to develop and configure your application. 
 
 bc.. $ cat config.ru
 require 'mojito'
@@ -36,9 +36,32 @@ Hello Fred! How are you?
 
 p. Please be aware that although this way is easy to start with it tends to get messy very quick if your project becomes more complex, so please read on...
 
-h2. Designing a real application
+h2. Structure of a real-world application
+
+p. The above call to @Mojito.application@ actually created a class and included most of Mojitos foundation methods, so that you could start writing your application code without wondering what features you want to include in your application. As a tribute to simplicity (one of the most important I think), another helper method @Mojito.base_application@ can be used to create a blank application class, which only includes modules that are strictly necessary. Instead of using those methods you can also write out all of the generated classes code:
+
+bc.. class FirstApp
+	include Mojito
+	routes do
+		on GET(), PATH('/hello/:name' do |name|
+			...
+		end
+	end
+end
+
+p. which is not only perfectly legal but also favoured, when you need any special behaviour on your application class.
+
+p. Although you can actually use any structure you want (including a single-file application), some of them are more useful than others. My preferred way of developing Mojito applications is to reuse most of the concepts found in production development with rubygems and git.
+
+h2. Behind the scenes
 
 p. tbd
+
+h3. Matchers
+
+h3. Renderers
+
+h3. Helpers
 
 h2. Deployment
 
