@@ -98,11 +98,15 @@ module Mojito
 			end
 		end
 		
+		##
+		# Dispatches the current request to the matching routes.
 		def dispatch
 			instance_exec &self.class.routes if self.class.routes
 			Rack::Response.new [], 404, 'Content-Type' => 'application/octet-stream'
 		end
 		
+		##
+		# Defines a route which is matched, when all given matchers evaluate to +true+.
 		def on(*matchers, &block)
 			env_backup = env.dup
 			param_size = captures.length
@@ -113,6 +117,9 @@ module Mojito
 			@__env = env_backup
 		end
 		
+		##
+		# Evaluates a single matcher, returning whether it matched or not. Please be aware that matchers (most prominently 
+		# the PATH matcher) may alter the current request, however a matcher is only allowed to do that when it matches.
 		def __match?(matcher)
 			case matcher
 			when String, Regexp
