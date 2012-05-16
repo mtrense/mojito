@@ -72,6 +72,27 @@ describe Mojito::Matchers::Path do
 		subject.path_info.should == '/rest'
 	end
 	
+	context do
+		subject do
+			Mojito.base_application Mojito::M::Path, Mojito::R::Content do
+				on PATH('hello/:name') do
+					on PATH('another/:name') do
+						write locals[:name]
+						halt!
+					end
+					write locals[:name]
+					halt!
+				end
+			end.mock_request
+		end
+		
+		it { subject.get('/hello/Fred').status.should == 200 }
+		it { subject.get('/hello/Fred').body.should == 'Fred' }
+		it { subject.get('/hello/Fred/another/Barney').status.should == 200 }
+		it { subject.get('/hello/Fred/another/Barney').body.should == 'Barney' }
+		
+	end
+	
 end
 
 describe Mojito::Matchers::VirtualHost do
