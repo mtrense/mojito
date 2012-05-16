@@ -59,6 +59,15 @@ p. Understanding how Mojito dispatches requests and selects handlers, which in t
 
 h3. Matching
 
+p. A matcher is simply a Proc, instantiated with matcher-specific configuration, which returns whether or not a given request matches its criteria. The method matcher for example is implemented as follows:
+
+bc.. 	def METHOD(method)
+	proc { request.request_method == method.to_s.upcase }
+end
+
+p. This method configures a Proc to return true when the requests method matches the given parameter. The returned Proc is evaluated in the context of the current controller. This is also where the @request@ method comes from. Like @request@, a matcher can access any method from the controller, within which it is executed. 
+
+
 h3. Rendering
 
 h3. Helpers
