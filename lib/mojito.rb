@@ -69,11 +69,11 @@ module Mojito
 		end
 		
 		def captures
-			@__captures ||= []
+			env['mojito/captures'] ||= []
 		end
 		
 		def locals
-			@__locals ||= {}
+			env['mojito/locals'] ||= {}
 		end
 		
 		def script_name
