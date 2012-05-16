@@ -123,6 +123,7 @@ module Mojito
 				matcher
 			end
 		end
+		private :__match?
 		
 		module ClassMethods
 			
