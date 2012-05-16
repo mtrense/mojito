@@ -36,3 +36,18 @@ describe Mojito::Rendering::StatusCodes do
 	it { subject.get('/redirect').headers['Location'].should == '/test' }
 	
 end
+
+describe Mojito::Rendering::Delegation do
+	
+	subject do
+		sub_app = Mojito.base_application Mojito::Rendering::Content, Mojito::Rendering::Delegation do
+			on true do write 'sub-application' ; halt! end
+		end
+		Mojito.base_application Mojito::Rendering::Content, Mojito::Rendering::Delegation do
+			on true do run! sub_app end
+		end.mock_request
+	end
+	
+	it { subject.get('/').body.should == 'sub-application' }
+	
+end
