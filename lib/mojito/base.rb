@@ -74,6 +74,8 @@ module Mojito
 		
 		module ClassMethods
 			
+			
+			
 			def call(env)
 				catch :halt do
 					new(env).dispatch
