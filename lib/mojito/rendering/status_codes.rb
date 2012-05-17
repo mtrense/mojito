@@ -25,8 +25,7 @@ module Mojito::Rendering
 		end
 		
 		def redirect(target, status = 302)
-			response['Location'] = target
-			response.status = status
+			response.redirect(target, status)
 		end
 		
 		def redirect!(target, status = 302)
