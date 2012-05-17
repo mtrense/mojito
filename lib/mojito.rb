@@ -1,6 +1,6 @@
 # encoding: UTF-8
 require 'rack'
-require 'slick/logging'
+require 'extlib'
 
 module Mojito
 	require 'mojito/utils/status_codes'
