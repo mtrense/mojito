@@ -9,9 +9,13 @@ module Mojito::Rendering
 		
 		def file!(filename)
 			path = Pathname === filename ? filename : Pathname.new(filename.to_s)
-			
-			body = FileResponse.new path
-			halt! [response.status, response.headers.merge(body.compute_headers), body]
+			restrict_path! path if respond_to? :restrict_path!
+			if path.readable? and path.file?
+				body = FileResponse.new path
+				halt! [response.status, response.headers.merge(body.compute_headers), body]
+			else
+				not_found!
+			end
 		end
 		
 		class FileResponse
