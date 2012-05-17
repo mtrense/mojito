@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mojito"
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Trense"]
-  s.date = "2012-05-14"
+  s.date = "2012-05-17"
   s.description = "A simple yet powerful webframework largely inspired by Rum and Cuba"
   s.email = "dev@trense.info"
   s.extra_rdoc_files = [
@@ -20,8 +20,10 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "VERSION",
     "lib/mojito.rb",
+    "lib/mojito/base.rb",
     "lib/mojito/helpers.rb",
     "lib/mojito/helpers/exception_handling.rb",
+    "lib/mojito/helpers/shortcuts.rb",
     "lib/mojito/matchers.rb",
     "lib/mojito/matchers/methods.rb",
     "lib/mojito/matchers/path.rb",
@@ -30,15 +32,20 @@ Gem::Specification.new do |s|
     "lib/mojito/rendering/content.rb",
     "lib/mojito/rendering/content_types.rb",
     "lib/mojito/rendering/delegation.rb",
+    "lib/mojito/rendering/file.rb",
     "lib/mojito/rendering/status_codes.rb",
+    "lib/mojito/request_extensions.rb",
     "lib/mojito/utils/status_codes.rb",
+    "spec/mojito/helpers_spec.rb",
     "spec/mojito/matchers_spec.rb",
     "spec/mojito/rendering_spec.rb",
+    "spec/mojito/request_extensions_spec.rb",
     "spec/mojito_spec.rb"
   ]
   s.homepage = "http://github.com/mtrense/mojito"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
+  s.required_ruby_version = Gem::Requirement.new(">= 1.9.0")
   s.rubygems_version = "1.8.17"
   s.summary = "A simple yet powerful webframework largely inspired by Rum and Cuba"
 
@@ -48,6 +55,8 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rack>, ["~> 1.4.0"])
       s.add_runtime_dependency(%q<mime-types>, ["~> 1.18"])
+      s.add_runtime_dependency(%q<tilt>, ["~> 1.3.3"])
+      s.add_runtime_dependency(%q<extlib>, ["~> 0.9.15"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -56,6 +65,8 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<rack>, ["~> 1.4.0"])
       s.add_dependency(%q<mime-types>, ["~> 1.18"])
+      s.add_dependency(%q<tilt>, ["~> 1.3.3"])
+      s.add_dependency(%q<extlib>, ["~> 0.9.15"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -65,6 +76,8 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<rack>, ["~> 1.4.0"])
     s.add_dependency(%q<mime-types>, ["~> 1.18"])
+    s.add_dependency(%q<tilt>, ["~> 1.3.3"])
+    s.add_dependency(%q<extlib>, ["~> 0.9.15"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
