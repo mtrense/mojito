@@ -22,7 +22,6 @@ module Mojito
 		module ExceptionHandling
 			
 			def self.included(type)
-				type.extend ClassMethods
 				type.instance_exec do
 					old_dispatch = instance_method(:dispatch)
 					define_method :dispatch do
@@ -33,6 +32,7 @@ module Mojito
 						end
 					end
 				end
+				type.extend ClassMethods
 			end
 			
 			def raise(exception)

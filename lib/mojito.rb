@@ -28,7 +28,6 @@ module Mojito
 				include Mojito::Base
 				helpers.reverse.each do |helper|
 					include helper
-					extend helper::ClassMethods if helper.const_defined? :ClassMethods
 				end
 			end
 			cl.routes &block if block
@@ -41,7 +40,6 @@ module Mojito
 				include Mojito
 				helpers.reverse.each do |helper|
 					include helper
-					extend helper::ClassMethods if helper.const_defined? :ClassMethods
 				end
 			end
 			cl.routes &block if block
