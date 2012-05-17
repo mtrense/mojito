@@ -74,8 +74,6 @@ module Mojito
 		
 		module ClassMethods
 			
-			
-			
 			def call(env)
 				catch :halt do
 					new(env).dispatch
@@ -85,6 +83,10 @@ module Mojito
 			def routes(&block)
 				@__routing = block if block
 				@__routing
+			end
+			
+			def to_app
+				self
 			end
 			
 			def mock_request
