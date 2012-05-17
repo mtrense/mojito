@@ -94,7 +94,7 @@ module Mojito
 				response.status = STATUS[resp].code
 				response.finish
 			else
-				[500, { 'Content-Type' => 'application/octet-stream' }, []]
+				[500, { 'Content-Type' => 'text/plain', 'Content-Length' => '0' }, []]
 			end
 		end
 		
