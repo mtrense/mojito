@@ -46,30 +46,30 @@ describe Mojito::Matchers::Path do
 	
 	it do
 		subject.send(:__match?, Mojito::M::PATH('hello/:name'))
-		subject.captures.should == ['world']
-		subject.locals.should == { 'name' => 'world' }
-		subject.path_info.should == '/rest'
+		subject.request.captures.should == ['world']
+		subject.request.locals.should == { 'name' => 'world' }
+		subject.request.path_info.should == '/rest'
 	end
 	
 	it do
 		subject.send(:__match?, 'hello/:name')
-		subject.captures.should == ['world']
-		subject.locals.should == { 'name' => 'world' }
-		subject.path_info.should == '/rest'
+		subject.request.captures.should == ['world']
+		subject.request.locals.should == { 'name' => 'world' }
+		subject.request.path_info.should == '/rest'
 	end
 	
 	it do
 		subject.send(:__match?, Mojito::M::PATH(%r{hello/(?<name>[^/]+)}))
-		subject.captures.should == ['world']
-		subject.locals.should == { 'name' => 'world' }
-		subject.path_info.should == '/rest'
+		subject.request.captures.should == ['world']
+		subject.request.locals.should == { 'name' => 'world' }
+		subject.request.path_info.should == '/rest'
 	end
 	
 	it do
 		subject.send(:__match?, %r{hello/(?<name>[^/]+)})
-		subject.captures.should == ['world']
-		subject.locals.should == { 'name' => 'world' }
-		subject.path_info.should == '/rest'
+		subject.request.captures.should == ['world']
+		subject.request.locals.should == { 'name' => 'world' }
+		subject.request.path_info.should == '/rest'
 	end
 	
 	context do
@@ -77,10 +77,10 @@ describe Mojito::Matchers::Path do
 			Mojito.base_application Mojito::M::Path, Mojito::R::Content do
 				on PATH('hello/:name') do
 					on PATH('another/:name') do
-						write locals[:name]
+						write request.locals[:name]
 						halt!
 					end
-					write locals[:name]
+					write request.locals[:name]
 					halt!
 				end
 			end.mock_request

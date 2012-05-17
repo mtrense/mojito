@@ -40,7 +40,7 @@ end
 describe Mojito::Rendering::Delegation do
 	
 	subject do
-		sub_app = Mojito.base_application Mojito::Rendering::Content, Mojito::Rendering::Delegation do
+		sub_app = Mojito.base_application Mojito::R::Content, Mojito::R::Delegation do
 			on true do write 'sub-application' ; halt! end
 		end
 		Mojito.base_application Mojito::Rendering::Content, Mojito::Rendering::Delegation do
@@ -54,7 +54,7 @@ describe Mojito::Rendering::Delegation do
 	context do
 		
 		subject do
-			sub_app = Mojito.base_application Mojito::R::Content, Mojito::R::Delegation do
+			sub_app = Mojito.base_application Mojito::R::Content, Mojito::R::Delegation, Mojito::H::Shortcuts do
 				on true do write("#{path_info} #{captures.first}") ; halt! end
 			end
 			Mojito.base_application Mojito::M::Path, Mojito::R::Content, Mojito::R::Delegation do
