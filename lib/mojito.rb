@@ -73,7 +73,7 @@ module Mojito
 		end
 		
 		def locals
-			env['mojito/locals'] ||= {}
+			env['mojito/locals'] ||= Mash.new
 		end
 		
 		def script_name
@@ -106,7 +106,7 @@ module Mojito
 		end
 		
 		##
-		# Defines a route which is matched, when all given matchers evaluate to +true+.
+		# Defines a route which is matched when all given matchers evaluate to +true+.
 		def on(*matchers, &block)
 			env_backup = env.dup
 			param_size = captures.length
