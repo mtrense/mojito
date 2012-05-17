@@ -23,9 +23,9 @@ class TestApp
 	
 	on_error 503 do
 		write "Sorry we're down this time."
-		unavailable!
+		halt!
 	end
 	
 end
 
-run TestApp
+run TestApp.to_app

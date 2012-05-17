@@ -50,13 +50,13 @@ module Mojito
 			def __handle_error(exception)
 				if handler = case exception
 					when MojitoException
+						response.status = exception.status
 						self.class.error_handlers[exception.status]
 					when Exception
 						self.class.error_handlers[exception.class]
 					end
 					instance_exec &handler
 				end
-				puts "Exception: #{exception.inspect}"
 				raise exception
 			end
 			
