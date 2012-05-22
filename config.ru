@@ -8,10 +8,21 @@ class TestApp
 	include	Mojito
 	
 	routes do
-		on PATH('hello/:name') do |name|
-			write "Hello #{name}!"
-			content_type :plain
+		on 'concatenate' do
+			content_type :plain, ''.encoding
+			write "start\n"
+			on 'with_middle' do
+				write "middle ä\n"
+			end
+			write "end\n"
 			ok!
+		end
+		on GET() do
+			on PATH('hello/:name') do |name|
+				write "Hello #{name}!"
+				content_type :plain
+				ok!
+			end
 		end
 		on GET() do
 			on 'exception' do
