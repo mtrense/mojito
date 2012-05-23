@@ -6,7 +6,7 @@ module Mojito::Matchers
 		
 		def PATH(pattern)
 			consume_path = proc do |pattern|
-				if match = env['PATH_INFO'].match(%r<\A/#{pattern}(?=/|\z)>)
+				if match = env['PATH_INFO'].match(%r<\A/*#{pattern}(?=/|\z)>)
 					env['SCRIPT_NAME'] = match.to_s
 					env['PATH_INFO'] = match.post_match
 					request.locals.update match.names.inject({}) {|hash, name| hash[name.to_sym] = match[name] ; hash }
@@ -23,7 +23,7 @@ module Mojito::Matchers
 					when Regexp
 						pattern
 					end
-					instance_exec p,  &consume_path
+					instance_exec p, &consume_path
 				else
 					false
 				end
