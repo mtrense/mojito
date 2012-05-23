@@ -55,6 +55,7 @@ module Mojito
 			instance_exec *params, &block
 		ensure
 			@__env = env_backup
+			request.instance_exec { @env = env_backup }
 		end
 		
 		##
