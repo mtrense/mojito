@@ -9,6 +9,11 @@ class TestApp
 	
 	routes do
 		on 'inline_template/:name' do |name|
+			content_type :plain
+			template :liquid, 'Hello {{name}}!'
+			ok!
+		end
+		on 'template/:name' do |name|
 			template 'test.html.liquid'
 			ok!
 		end
