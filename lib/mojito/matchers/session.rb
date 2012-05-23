@@ -5,9 +5,7 @@ module Mojito::Matchers
 	module Session
 
 		def SESSION(name)
-			proc do
-				request.session.include? name.to_s
-			end
+			proc { request.session.include? name.to_s }
 		end
 		
 	end
