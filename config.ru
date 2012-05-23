@@ -5,9 +5,14 @@ require 'mojito'
 use Rack::ShowExceptions
 
 class TestApp	
-	include	Mojito
+	include	 Mojito
 	
 	routes do
+		on 'inline_template/:name' do |name|
+			template 'test.html.liquid'
+			ok!
+		end
+		
 		on 'concatenate' do
 			content_type :plain, ''.encoding
 			write "start\n"
@@ -17,6 +22,7 @@ class TestApp
 			write "end\n"
 			ok!
 		end
+		
 		on GET() do
 			on PATH('hello/:name') do |name|
 				write "Hello #{name}!"
