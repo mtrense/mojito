@@ -46,6 +46,11 @@ module Mojito
 		end
 	end
 	
+	def self.mode
+		(ENV['RACK_ENV'] || :development).to_sym
+	end
+
+	
 	ALL_HELPERS = [Mojito::Matchers, Mojito::Rendering, Mojito::Helpers::ExceptionHandling, Mojito::Helpers::Shortcuts, Mojito::Base]
 
 end
