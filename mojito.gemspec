@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mojito"
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Trense"]
-  s.date = "2012-05-17"
+  s.date = "2012-05-25"
   s.description = "A simple yet powerful webframework largely inspired by Rum and Cuba"
   s.email = "dev@trense.info"
   s.extra_rdoc_files = [
@@ -25,8 +25,11 @@ Gem::Specification.new do |s|
     "lib/mojito/helpers/exception_handling.rb",
     "lib/mojito/helpers/shortcuts.rb",
     "lib/mojito/matchers.rb",
+    "lib/mojito/matchers/environment.rb",
     "lib/mojito/matchers/methods.rb",
     "lib/mojito/matchers/path.rb",
+    "lib/mojito/matchers/session.rb",
+    "lib/mojito/matchers/url_scheme.rb",
     "lib/mojito/matchers/virtual_host.rb",
     "lib/mojito/rendering.rb",
     "lib/mojito/rendering/content.rb",
@@ -34,10 +37,21 @@ Gem::Specification.new do |s|
     "lib/mojito/rendering/delegation.rb",
     "lib/mojito/rendering/file.rb",
     "lib/mojito/rendering/status_codes.rb",
+    "lib/mojito/rendering/templates.rb",
     "lib/mojito/request_extensions.rb",
     "lib/mojito/utils/status_codes.rb",
     "spec/mojito/helpers_spec.rb",
+    "spec/mojito/matchers/methods_spec.rb",
+    "spec/mojito/matchers/path_spec.rb",
+    "spec/mojito/matchers/session_spec.rb",
+    "spec/mojito/matchers/url_scheme_spec.rb",
+    "spec/mojito/matchers/virtual_host_spec.rb",
     "spec/mojito/matchers_spec.rb",
+    "spec/mojito/rendering/content_spec.rb",
+    "spec/mojito/rendering/delegation_spec.rb",
+    "spec/mojito/rendering/file_spec.rb",
+    "spec/mojito/rendering/status_codes_spec.rb",
+    "spec/mojito/rendering/templates_spec.rb",
     "spec/mojito/rendering_spec.rb",
     "spec/mojito/request_extensions_spec.rb",
     "spec/mojito_spec.rb"
@@ -57,6 +71,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<mime-types>, ["~> 1.18"])
       s.add_runtime_dependency(%q<tilt>, ["~> 1.3.3"])
       s.add_runtime_dependency(%q<extlib>, ["~> 0.9.15"])
+      s.add_runtime_dependency(%q<where-am-i>, ["~> 1.0.0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -67,6 +82,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mime-types>, ["~> 1.18"])
       s.add_dependency(%q<tilt>, ["~> 1.3.3"])
       s.add_dependency(%q<extlib>, ["~> 0.9.15"])
+      s.add_dependency(%q<where-am-i>, ["~> 1.0.0"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -78,6 +94,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mime-types>, ["~> 1.18"])
     s.add_dependency(%q<tilt>, ["~> 1.3.3"])
     s.add_dependency(%q<extlib>, ["~> 0.9.15"])
+    s.add_dependency(%q<where-am-i>, ["~> 1.0.0"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
