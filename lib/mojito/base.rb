@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+require 'mime/types'
+
 module Mojito
 	
 	module Base
@@ -42,7 +44,7 @@ module Mojito
 		# Dispatches the current request to the matching routes.
 		def dispatch
 			instance_exec &self.class.routes if self.class.routes
-			Rack::Response.new [], 404, 'Content-Type' => 'application/octet-stream'
+			[404, { 'Content-Type' => 'application/octet-stream' }, []]
 		end
 		
 		##
@@ -64,7 +66,7 @@ module Mojito
 		def __match?(matcher)
 			case matcher
 			when String, Regexp
-				instance_exec &Matchers::PATH(matcher)
+				instance_exec &Mojito::Matchers::PATH(matcher)
 			when Proc
 				instance_exec &matcher
 			else
@@ -76,9 +78,15 @@ module Mojito
 		module ClassMethods
 			
 			def call(env)
-				catch :halt do
+				extension = env['PATH_INFO'][/(?<=\.)\w+$/]
+				response = catch :halt do
 					new(env).dispatch
 				end
+				unless response[1].include? 'Content-Type'
+					type = MIME::Types.type_for(extension).first
+					response[1]['Content-Type'] = type if type
+				end
+				response
 			end
 			
 			def routes(&block)
