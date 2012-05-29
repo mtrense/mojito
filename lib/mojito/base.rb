@@ -26,7 +26,7 @@ module Mojito
 			@__response ||= Rack::Response.new.tap do |res|
 				if extension = request.path[/(?<=\.)\w+$/]
 					type = MIME::Types.type_for(extension).first
-					res.headers['Content-Type'] = type if type
+					res.headers['Content-Type'] = type.to_s if type
 				end
 			end
 		end
