@@ -23,7 +23,12 @@ module Mojito
 		end
 		
 		def response
-			@__response ||= Rack::Response.new
+			@__response ||= Rack::Response.new.tap do |res|
+				if extension = request.path[/(?<=\.)\w+$/]
+					type = MIME::Types.type_for(extension).first
+					res.headers['Content-Type'] = type if type
+				end
+			end
 		end
 		
 		def halt!(resp = response)
@@ -78,15 +83,9 @@ module Mojito
 		module ClassMethods
 			
 			def call(env)
-				extension = env['PATH_INFO'][/(?<=\.)\w+$/]
-				response = catch :halt do
+				catch :halt do
 					new(env).dispatch
 				end
-				unless response[1].include? 'Content-Type'
-					type = MIME::Types.type_for(extension).first
-					response[1]['Content-Type'] = type if type
-				end
-				response
 			end
 			
 			def routes(&block)
