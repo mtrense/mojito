@@ -11,7 +11,7 @@ module Mojito
 		end
 		
 		def initialize(env)
-			@__env = env
+			@__env = env.dup
 		end
 		
 		def env
