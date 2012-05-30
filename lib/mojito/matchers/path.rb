@@ -32,4 +32,6 @@ module Mojito::Matchers
 		
 	end
 	
+	Mojito::PLUGINS[:path] = Path
+	
 end

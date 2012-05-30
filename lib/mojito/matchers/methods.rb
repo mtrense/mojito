@@ -30,4 +30,6 @@ module Mojito::Matchers
 		
 	end
 	
+	Mojito::PLUGINS[:methods] = Methods
+	
 end

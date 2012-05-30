@@ -10,4 +10,6 @@ module Mojito::Matchers
 		
 	end
 	
+	Mojito::PLUGINS[:session] = Session
+	
 end

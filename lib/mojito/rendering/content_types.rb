@@ -17,4 +17,6 @@ module Mojito::Rendering
 		
 	end
 	
+	Mojito::PLUGINS[:content_types] = ContentTypes
+	
 end

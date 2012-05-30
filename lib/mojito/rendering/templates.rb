@@ -23,4 +23,6 @@ module Mojito::Rendering
 		
 	end
 	
+	Mojito::PLUGINS[:templates] = Templates
+
 end

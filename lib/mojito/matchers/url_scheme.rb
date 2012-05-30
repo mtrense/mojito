@@ -19,4 +19,6 @@ module Mojito::Matchers
 		
 	end
 	
+	Mojito::PLUGINS[:url_scheme] = UrlScheme
+	
 end

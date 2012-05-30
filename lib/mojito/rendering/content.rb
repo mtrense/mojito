@@ -19,4 +19,6 @@ module Mojito::Rendering
 		
 	end
 
+	Mojito::PLUGINS[:content] = Content
+	
 end

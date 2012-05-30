@@ -19,4 +19,6 @@ module Mojito::Matchers
 		
 	end
 	
+	Mojito::PLUGINS[:virtual_host] = VirtualHost
+	
 end

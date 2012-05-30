@@ -35,4 +35,6 @@ module Mojito::Rendering
 		
 	end
 	
+	Mojito::PLUGINS[:status_codes] = StatusCodes
+	
 end

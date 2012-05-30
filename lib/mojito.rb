@@ -3,6 +3,9 @@ require 'rack'
 require 'extlib'
 
 module Mojito
+	
+	PLUGINS = {}
+	
 	require 'mojito/request_extensions'
 	require 'mojito/helpers'
 	require 'mojito/base'
@@ -13,6 +16,7 @@ module Mojito
 	R = Rendering
 	M = Matchers
 	H = Helpers
+	
 	
 	def self.included(type)
 		type.instance_exec do
@@ -27,7 +31,12 @@ module Mojito
 			cl.instance_exec do
 				include Mojito::Base
 				helpers.reverse.each do |helper|
-					include helper
+					case helper
+					when Symbol
+						include PLUGINS[helper]
+					when Module
+						include helper
+					end
 				end
 			end
 			cl.routes &block if block

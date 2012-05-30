@@ -10,4 +10,6 @@ module Mojito::Matchers
 		
 	end
 	
+	Mojito::PLUGINS[:environment] = Environment
+	
 end

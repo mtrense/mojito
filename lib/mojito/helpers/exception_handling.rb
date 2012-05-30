@@ -79,6 +79,8 @@ module Mojito
 			
 		end
 		
+		Mojito::PLUGINS[:exception_handling] = ExceptionHandling
+
 	end
 
 end
