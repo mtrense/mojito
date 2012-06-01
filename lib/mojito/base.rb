@@ -11,15 +11,16 @@ module Mojito
 		end
 		
 		def initialize(env)
-			@__env = env.dup
+			@__request = Rack::Request.new env.dup
+			env['MOJITO/CONTEXT_PATH'] = env['SCRIPT_NAME']
 		end
 		
 		def env
-			@__env
+			request.env
 		end
 		
 		def request
-			@__request ||= Rack::Request.new(env)
+			@__request
 		end
 		
 		def response

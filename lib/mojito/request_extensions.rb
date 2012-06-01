@@ -10,6 +10,10 @@ class ::Rack::Request
 		@env['mojito/locals'] ||= Mash.new
 	end
 	
+	def context_path
+		@env['MOJITO/CONTEXT_PATH']
+	end
+	
 	def script_name
 		@env['SCRIPT_NAME']
 	end
