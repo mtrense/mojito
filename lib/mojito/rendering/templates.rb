@@ -13,6 +13,7 @@ module Mojito::Rendering
 				Tilt[args.first].new { args.last }
 			elsif args.size == 1
 				file = Where.cdir(1) + args.first
+				Mojito::R::StatusCodes.instance_method(:not_found!).bind(self).call unless file.exist?
 				if %r{\.(?<extension>\w+)\.\w+$} =~ file.to_s
 					response['Content-Type'] = MIME::Types.type_for(extension)
 				end
