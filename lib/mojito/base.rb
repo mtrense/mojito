@@ -12,7 +12,7 @@ module Mojito
 		
 		def initialize(env)
 			@__request = Rack::Request.new env.dup
-			env['MOJITO/CONTEXT_PATH'] = env['SCRIPT_NAME']
+			self.env['MOJITO/CONTEXT_PATH'] = self.env['SCRIPT_NAME']
 		end
 		
 		def env
@@ -85,7 +85,7 @@ module Mojito
 			
 			def call(env)
 				catch :halt do
-					new(env).dispatch
+					self.new(env).dispatch
 				end
 			end
 			
