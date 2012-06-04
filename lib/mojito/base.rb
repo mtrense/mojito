@@ -25,17 +25,20 @@ module Mojito
 		
 		def response
 			@__response ||= Rack::Response.new.tap do |res|
-				if extension = request.path[/(?<=\.)\w+$/]
-					type = MIME::Types.type_for(extension).first
-					res.headers['Content-Type'] = type.to_s if type
-				end
+				res.headers.delete 'Content-Type'
 			end
 		end
 		
 		def halt!(resp = response)
 			throw :halt, case resp
 			when Rack::Response
-				resp.finish
+				resp.tap { |res|
+					if extension = request.path[/(?<=\.)\w+$/] and res.status == 200 and type = MIME::Types.type_for(extension).first
+						res.headers['Content-Type'] = type.to_s
+					else
+						res.headers['Content-Type'] = 'text/html'
+					end
+				}.finish
 			when Array
 				resp
 			when Symbol, Integer
