@@ -6,9 +6,10 @@ module Mojito::Rendering
 		require 'pathname'
 		require 'mime/types'
 		require 'time'
+		require 'where'
 		
 		def file!(filename)
-			path = Pathname === filename ? filename : Pathname.new(filename.to_s)
+			path = Where.cdir(1) + filename
 			restrict_path! path if respond_to? :restrict_path!
 			if path.readable? and path.file?
 				body = FileResponse.new path
