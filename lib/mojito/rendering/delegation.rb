@@ -10,6 +10,4 @@ module Mojito::Rendering
 		
 	end
 	
-	Mojito::PLUGINS[:delegation] = Delegation
-	
 end

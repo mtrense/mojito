@@ -23,10 +23,10 @@ module Mojito
 			
 			def self.included(type)
 				type.instance_exec do
-					old_dispatch = instance_method(:dispatch)
-					define_method :dispatch do
+					old_call_with_handlers = method(:call_with_handlers)
+					define_method :call_with_handlers do
 						begin
-							old_dispatch.bind(self).call
+							old_call_with_handlers.bind(self).call
 						rescue Exception => e
 							__handle_error e
 						end
@@ -79,8 +79,6 @@ module Mojito
 			
 		end
 		
-		Mojito::PLUGINS[:exception_handling] = ExceptionHandling
-
 	end
 
 end

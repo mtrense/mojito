@@ -4,12 +4,12 @@ require 'simplecov' and SimpleCov.start do
 end
 require 'mojito'
 
-describe Mojito::Matchers::Path do
+describe Mojito::Controllers::Runtime::Path do
 	
-	subject { Mojito.application.new Rack::MockRequest.env_for('http://localhost/hello/world/rest') }
+	subject { Mojito::C.runtime_controller(Mojito::H::Shortcuts).new Rack::MockRequest.env_for('http://localhost/hello/world/rest') }
 	
 	it do
-		subject.send(:__match?, Mojito::M::PATH('hello'))
+		subject.send(:__match?, subject.PATH('hello'))
 		subject.captures.should be_empty
 		subject.locals.should be_empty
 		subject.path_info.should == '/world/rest'
@@ -23,7 +23,7 @@ describe Mojito::Matchers::Path do
 	end
 	
 	it do
-		subject.send(:__match?, Mojito::M::PATH('hello/:name'))
+		subject.send(:__match?, subject.PATH('hello/:name'))
 		subject.request.captures.should == ['world']
 		subject.request.locals.should == { 'name' => 'world' }
 		subject.request.path_info.should == '/rest'
@@ -37,7 +37,7 @@ describe Mojito::Matchers::Path do
 	end
 	
 	it do
-		subject.send(:__match?, Mojito::M::PATH(%r{hello/(?<name>[^/]+)}))
+		subject.send(:__match?, subject.PATH(%r{hello/(?<name>[^/]+)}))
 		subject.request.captures.should == ['world']
 		subject.request.locals.should == { 'name' => 'world' }
 		subject.request.path_info.should == '/rest'
@@ -52,7 +52,7 @@ describe Mojito::Matchers::Path do
 	
 	context do
 		subject do
-			Mojito.base_application Mojito::M::Path, Mojito::R::Content do
+			Mojito::C.runtime_controller Mojito::R::Content do
 				on PATH('hello/:name') do
 					on PATH('another/:name') do
 						write request.locals[:name]

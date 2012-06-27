@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-module Mojito::Matchers
+module Mojito::Controllers::Runtime
 	
 	module Path
 		
@@ -31,7 +31,5 @@ module Mojito::Matchers
 		end
 		
 	end
-	
-	Mojito::PLUGINS[:path] = Path
 	
 end

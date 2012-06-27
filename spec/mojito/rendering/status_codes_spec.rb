@@ -7,7 +7,7 @@ require 'mojito'
 describe Mojito::Rendering::StatusCodes do
 	
 	subject do
-		Mojito.base_application Mojito::Matchers::Path, Mojito::Rendering::StatusCodes do
+		Mojito::C.runtime_controller Mojito::R::StatusCodes do
 			on 'ok' do ok! end
 			on 'not_found' do not_found! end
 			on 'internal_server_error' do internal_server_error! end

@@ -51,6 +51,4 @@ module Mojito::Rendering
 		
 	end
 	
-	Mojito::PLUGINS[:file] = File
-
 end

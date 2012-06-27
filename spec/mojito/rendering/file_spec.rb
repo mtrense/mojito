@@ -7,7 +7,7 @@ require 'mojito'
 describe Mojito::Rendering::File do
 	
 	subject do
-		Mojito.base_application Mojito::Rendering::File do
+		Mojito::C.runtime_controller Mojito::R::File do
 			file! __FILE__
 		end.mock_request
 	end

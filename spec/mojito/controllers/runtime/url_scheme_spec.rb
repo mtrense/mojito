@@ -4,10 +4,10 @@ require 'simplecov' and SimpleCov.start do
 end
 require 'mojito'
 
-describe Mojito::Matchers::UrlScheme do
+describe Mojito::Controllers::Runtime::UrlScheme do
 	
 	subject do
-		Mojito.application Mojito::Matchers::UrlScheme do
+		Mojito::C.runtime_controller Mojito::Controllers::Runtime::UrlScheme, Mojito::R::Content do
 			on SCHEME(:http) do write 'insecure' ; halt! end
 			on SCHEME(:https) do write 'secure' ; halt! end
 		end.mock_request

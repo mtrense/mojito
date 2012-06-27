@@ -2,6 +2,10 @@
 
 class ::Rack::Request
 	
+	def dup
+		Rack::Request.new(@env.dup)
+	end
+	
 	def captures
 		@env['mojito/captures'] ||= []
 	end

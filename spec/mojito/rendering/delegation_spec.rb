@@ -7,11 +7,11 @@ require 'mojito'
 describe Mojito::Rendering::Delegation do
 	
 	subject do
-		sub_app = Mojito.base_application Mojito::R::Content, Mojito::M::Path do
+		sub_app = Mojito::C.runtime_controller Mojito::H::Shortcuts, Mojito::R::Content do
 			on PATH('this/is/the/sub-application') do write request.context_path ; halt! end
 			on true do write 'sub-application' ; halt! end
 		end
-		Mojito.base_application Mojito::Rendering::Content, Mojito::Rendering::Delegation do
+		Mojito::C.runtime_controller Mojito::R::Content, Mojito::R::Delegation do
 			on 'to/sub/app' do run! sub_app end
 		end.mock_request
 	end
@@ -23,10 +23,10 @@ describe Mojito::Rendering::Delegation do
 	context do
 		
 		subject do
-			sub_app = Mojito.base_application Mojito::R::Content, Mojito::H::Shortcuts do
+			sub_app = Mojito::C.runtime_controller Mojito::R::Content, Mojito::H::Shortcuts do
 				on true do write("#{path_info} #{captures.first}") ; halt! end
 			end
-			Mojito.base_application Mojito::M::Path, Mojito::R::Content, Mojito::R::Delegation do
+			Mojito::C.runtime_controller Mojito::R::Content, Mojito::R::Delegation do
 				on PATH('hello/:name') do run! sub_app end
 			end.mock_request
 		end

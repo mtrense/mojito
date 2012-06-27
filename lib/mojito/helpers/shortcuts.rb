@@ -32,6 +32,4 @@ module Mojito::Helpers
 		
 	end
 	
-	Mojito::PLUGINS[:shortcuts] = Shortcuts
-	
 end

@@ -9,11 +9,15 @@ module Mojito::Rendering
 	require 'mojito/rendering/status_codes'
 	require 'mojito/rendering/templates'
 	
-	include Content
-	include ContentTypes
-	include Delegation
-	include File
-	include StatusCodes
-	include Templates
+	def self.included(type)
+		type.instance_exec do
+			include Content
+			include ContentTypes
+			include Delegation
+			include File
+			include StatusCodes
+			include Templates
+		end
+	end
 	
 end

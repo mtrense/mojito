@@ -8,7 +8,7 @@ module Mojito::Rendering
 		require 'mime/types'
 		
 		def template(*args, &block)
-			locals = Hash === args.last ? args.pop : self.locals
+			locals = Hash === args.last ? args.pop : self.request.locals
 			template = if args.size == 2
 				Tilt[args.first].new { args.last }
 			elsif args.size == 1
@@ -24,6 +24,4 @@ module Mojito::Rendering
 		
 	end
 	
-	Mojito::PLUGINS[:templates] = Templates
-
 end

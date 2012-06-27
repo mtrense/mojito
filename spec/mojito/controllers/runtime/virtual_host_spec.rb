@@ -4,10 +4,10 @@ require 'simplecov' and SimpleCov.start do
 end
 require 'mojito'
 
-describe Mojito::Matchers::VirtualHost do
+describe Mojito::Controllers::Runtime::VirtualHost do
 	
 	subject do
-		Mojito.application Mojito::Matchers::VirtualHost do
+		Mojito::C.runtime_controller Mojito::Controllers::Runtime::VirtualHost, Mojito::R::Content do
 			on HOST('localhost') do write 'localhost' ; halt! end
 			on HOST('test:8080') do write 'test' ; halt! end
 		end.mock_request

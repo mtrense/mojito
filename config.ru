@@ -4,10 +4,29 @@ require 'mojito'
 
 use Rack::ShowExceptions
 
+class MethodTest
+	include	 Mojito
+	include Mojito::C::Method
+	include Mojito::Rendering
+	
+	def test
+		write 'This is a test message'
+		ok!
+	end
+	
+end
+
 class TestApp	
 	include	 Mojito
+	include Mojito::C::Runtime
+	include Mojito::Rendering
+	include Mojito::H::ExceptionHandling
 	
 	routes do
+		on 'method' do
+			run! MethodTest
+		end
+		
 		on 'inline_template/:name' do |name|
 			content_type :plain
 			template :liquid, 'Hello {{name}}!'
@@ -15,6 +34,10 @@ class TestApp
 		end
 		on 'template/:name' do |name|
 			template 'test.html.liquid'
+			ok!
+		end
+		on 'template_xml/:name' do |name|
+			template 'test.xml.erb'
 			ok!
 		end
 		
@@ -50,4 +73,4 @@ class TestApp
 	
 end
 
-run TestApp.to_app
+run TestApp

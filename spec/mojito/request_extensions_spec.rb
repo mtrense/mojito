@@ -7,7 +7,7 @@ require 'mojito'
 describe ::Rack::Request do
 	
 	subject do
-		Mojito.base_application Mojito::Rendering::Content do
+		Mojito::C.runtime_controller Mojito::Rendering::Content do
 			write request.GET[:hello]
 			halt!
 		end.mock_request

@@ -7,8 +7,8 @@ require 'mojito'
 describe Mojito::Base do
 	
 	subject do
-		Mojito.base_application :status_codes do
-			on Mojito::Matchers::PATH('test.:extension') do ok! end
+		Mojito::C.runtime_controller Mojito::R::StatusCodes do
+			on PATH('test.:extension') do ok! end
 		end.mock_request
 	end
 	

@@ -7,13 +7,13 @@ require 'mojito'
 describe Mojito do
   
 	context do
-		subject { Mojito.application {} }
+		subject { Mojito::C.runtime_controller {} }
 		it { subject.ancestors.should include(Mojito::Base) }
 		it { subject.should respond_to(:call) }
 	end
 	
 	context do
-		subject { Mojito.application(Mojito::Matchers::Path).new Rack::MockRequest.env_for('http://localhost/hello/world/rest') }
+		subject { Mojito::C.runtime_controller(Mojito::H::Shortcuts).new Rack::MockRequest.env_for('http://localhost/hello/world/rest') }
 		it { subject.env.should_not be_nil }
 		it { subject.request.should be_kind_of(Rack::Request) }
 		it { subject.captures.should be_empty }
@@ -28,7 +28,7 @@ describe Mojito do
 	
 	context do
 		subject do
-			Mojito.application do
+			Mojito::C.runtime_controller do
 				
 			end
 		end

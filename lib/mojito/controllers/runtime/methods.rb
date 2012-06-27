@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-module Mojito::Matchers
+module Mojito::Controllers::Runtime
 	
 	module Methods
 		
@@ -29,7 +29,5 @@ module Mojito::Matchers
 		end
 		
 	end
-	
-	Mojito::PLUGINS[:methods] = Methods
 	
 end

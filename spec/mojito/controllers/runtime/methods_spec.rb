@@ -4,10 +4,10 @@ require 'simplecov' and SimpleCov.start do
 end
 require 'mojito'
 
-describe Mojito::Matchers::Methods do
+describe Mojito::Controllers::Runtime::Methods do
 	
 	subject do
-		Mojito.application Mojito::Matchers::Methods do
+		Mojito::C.runtime_controller Mojito::R::Content, Mojito::Controllers::Runtime::Methods do
 			on GET() do write 'get' ; halt! end
 			on POST() do write 'post' ; halt! end
 			on HEAD() do write 'head' ; halt! end

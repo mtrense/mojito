@@ -8,7 +8,7 @@ describe Mojito::Rendering::Templates do
 	
 	context 'inline templates' do
 		subject do
-			Mojito.base_application Mojito::Rendering::Templates do
+			Mojito::C.runtime_controller Mojito::Rendering::Templates do
 				template :erb, 'before <%= var %> <%= yield %> after', :var => 'middle' do 'inside the block' end
 				halt!
 			end.mock_request
@@ -21,7 +21,7 @@ describe Mojito::Rendering::Templates do
 	
 	context 'file templates' do
 		subject do
-			Mojito.base_application Mojito::Rendering::Templates do
+			Mojito::C.runtime_controller Mojito::Rendering::Templates do
 				template 'test.html.erb', :var => 'middle' do 'inside the block' end
 				halt!
 			end.mock_request

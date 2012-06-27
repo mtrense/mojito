@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-module Mojito::Matchers
+module Mojito::Controllers::Runtime
 	
 	module VirtualHost
 		
@@ -18,7 +18,5 @@ module Mojito::Matchers
 		end
 		
 	end
-	
-	Mojito::PLUGINS[:virtual_host] = VirtualHost
 	
 end
