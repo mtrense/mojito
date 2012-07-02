@@ -19,4 +19,20 @@ describe Mojito::Base do
 	it { subject.get('/test.rb').headers.should include('Content-Type') }
 	it { subject.get('/test.rb').headers['Content-Type'].should == 'application/x-ruby' }
 	
+	context do
+		
+		subject do
+			Class.new.tap do |c|
+				c.class_exec do
+					include Mojito::Base
+				end
+			end
+		end
+		
+		it { subject.should respond_to(:new).with(1).argument }
+		it { subject.should respond_to(:call).with(1).argument }
+		it { subject.should respond_to(:dispatch).with(1).argument }
+		
+	end
+		
 end
