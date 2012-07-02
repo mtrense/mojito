@@ -1,8 +1,10 @@
 # encoding: UTF-8
 require 'simplecov' and SimpleCov.start do
 	add_filter "spec/"
+	add_filter "lib/mojito/utils/rspec.rb"
 end
 require 'mojito'
+require 'mojito/utils/rspec'
 
 describe Mojito::Controllers::Method do
 	
@@ -20,11 +22,9 @@ describe Mojito::Controllers::Method do
 		end.mock_request
 	end
 	
-	it { subject.get('/test_method').status.should == 200 }
-	it { subject.get('/test_method').body.should == 'Test method' }
+	it { subject.get('/test_method').should respond_with(200, 'Test method') }
 	
-	it { subject.get('/hello/Fred').status.should == 200 }
-	it { subject.get('/hello/Fred').body.should == 'Hello Fred' }
+	it { subject.get('/hello/Fred').should respond_with(200, 'Hello Fred') }
 	
 	it { subject.get('/hello').status.should == 404 }
 	
