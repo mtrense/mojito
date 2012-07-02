@@ -11,6 +11,7 @@ module Mojito::Controllers
 				args = rest ? rest.split('/') : []
 				if arity == args.length or arity < 0 and (-arity - 1) < args.length
 					send meth.to_sym, *args
+					ok!
 				else
 					Mojito::R::StatusCodes.instance_method(:not_found!).bind(self).call
 				end
@@ -21,11 +22,14 @@ module Mojito::Controllers
 		
 	end
 	
-	def self.method_controller(&block)
+	def self.method_controller(*modules, &block)
 		Class.new.tap do |controller|
 			controller.instance_exec do
 				include Mojito::Base
 				include Mojito::Controllers::Method
+				modules.each do |mod|
+					include mod
+				end
 			end
 			controller.class_exec &block if block
 		end
