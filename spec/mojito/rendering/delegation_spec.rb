@@ -18,9 +18,8 @@ describe Mojito::Rendering::Delegation do
 		end.mock_request
 	end
 	
-	it { subject.get('/to/sub/app').status.should == 200 }
-	it { subject.get('/to/sub/app').body.should == 'sub-application' }
-	it { subject.get('/to/sub/app/this/is/the/sub-application').body.should == '/to/sub/app' }
+	it { subject.get('/to/sub/app').should respond_with(200, 'sub-application') }
+	it { subject.get('/to/sub/app/this/is/the/sub-application').should respond_with(200, '/to/sub/app') }
 	
 	context do
 		
@@ -33,8 +32,7 @@ describe Mojito::Rendering::Delegation do
 			end.mock_request
 		end
 		
-		it { subject.get('/hello/world/rest').status.should == 200 }
-		it { subject.get('/hello/world/rest').body.should == '/rest world' }
+		it { subject.get('/hello/world/rest').should respond_with(200, '/rest world') }
 
 	end
 		

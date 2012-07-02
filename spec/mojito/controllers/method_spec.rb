@@ -26,14 +26,13 @@ describe Mojito::Controllers::Method do
 	
 	it { subject.get('/hello/Fred').should respond_with(200, 'Hello Fred') }
 	
-	it { subject.get('/hello').status.should == 404 }
+	it { subject.get('/hello').should respond_with(404) }
 	
-	it { subject.get('/hello_all/Fred/Barney').status.should == 200 }
-	it { subject.get('/hello_all/Fred/Barney').body.should == 'Hello Fred, Barney' }
-	it { subject.get('/hello_all/Fred/Barney/Wilma').body.should == 'Hello Fred, Barney, Wilma' }
+	it { subject.get('/hello_all/Fred/Barney').should respond_with(200, 'Hello Fred, Barney') }
+	it { subject.get('/hello_all/Fred/Barney/Wilma').should respond_with(200, 'Hello Fred, Barney, Wilma') }
 
-	it { subject.get('/hello_all').status.should == 404 }
+	it { subject.get('/hello_all').should respond_with(404) }
 	
-	it { subject.get('/not_defined_method').status.should == 404 }
+	it { subject.get('/not_defined_method').should respond_with(404) }
 	
 end

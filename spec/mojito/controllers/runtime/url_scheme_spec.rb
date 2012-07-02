@@ -15,10 +15,10 @@ describe Mojito::Controllers::Runtime::UrlScheme do
 		end.mock_request
 	end
 	
-	it { subject.get('http://localhost/').body.should == 'insecure' }
-	it { subject.get('http://localhost:7777/').body.should == 'insecure' }
-	it { subject.get('https://localhost:80/').body.should == 'secure' }
-	it { subject.get('https://localhost/').body.should == 'secure' }
-	it { subject.get('otherprotocol://test/').status.should == 404 }
+	it { subject.get('http://localhost/').should respond_with(200, 'insecure') }
+	it { subject.get('http://localhost:7777/').should respond_with(200, 'insecure') }
+	it { subject.get('https://localhost:80/').should respond_with(200, 'secure') }
+	it { subject.get('https://localhost/').should respond_with(200, 'secure') }
+	it { subject.get('otherprotocol://test/').should respond_with(404) }
 	
 end

@@ -15,10 +15,10 @@ describe Mojito::Controllers::Runtime::VirtualHost do
 		end.mock_request
 	end
 	
-	it { subject.get('http://localhost:4444/').body.should == 'localhost' }
-	it { subject.get('http://localhost/').body.should == 'localhost' }
-	it { subject.get('http://localhost:80/').body.should == 'localhost' }
-	it { subject.get('http://test:8080/').body.should == 'test' }
-	it { subject.get('http://test/').status.should == 404 }
+	it { subject.get('http://localhost:4444/').should respond_with(200, 'localhost') }
+	it { subject.get('http://localhost/').should respond_with(200, 'localhost') }
+	it { subject.get('http://localhost:80/').should respond_with(200, 'localhost') }
+	it { subject.get('http://test:8080/').should respond_with(200, 'test') }
+	it { subject.get('http://test/').should respond_with(404) }
 	
 end

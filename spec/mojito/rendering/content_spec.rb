@@ -14,6 +14,6 @@ describe Mojito::Rendering::Content do
 		end.mock_request
 	end
 	
-	it { subject.get('/').body.should == 'test content' }
+	it { subject.get('/').should respond_with(200, 'test content') }
 	
 end
