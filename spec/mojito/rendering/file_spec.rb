@@ -14,13 +14,11 @@ describe Mojito::Rendering::File do
 		end.mock_request
 	end
 	
-	it { subject.get('/').status.should == 200 }
-	it { subject.get('/').headers.should include('Content-Type') }
-	it { subject.get('/').headers['Content-Type'].should == 'application/x-ruby' }
-	it { subject.get('/').headers.should include('Content-Length') }
-	it { subject.get('/').headers['Content-Length'].should == ::File.size(__FILE__).to_s }
-	it { subject.get('/').headers.should include('Last-Modified') }
-	it { subject.get('/').headers['Last-Modified'].should == ::File.mtime(__FILE__).rfc2822 }
-	it { subject.get('/').body.should == ::File.read(__FILE__) }
+	it do
+		subject.get('/').should respond_with(200, ::File.read(__FILE__),
+			'Content-Type' => 'application/x-ruby', 
+			'Content-Length' => ::File.size(__FILE__).to_s, 
+			'Last-Modified' => ::File.mtime(__FILE__).rfc2822)
+	end
 	
 end
