@@ -7,19 +7,15 @@ require 'mojito'
 describe Mojito::Controllers::Method do
 	
 	subject do
-		Mojito::Controllers.method_controller do
-			include Mojito::Rendering
+		Mojito::Controllers.method_controller(Mojito::Rendering) do
 			def test_method
 				write 'Test method'
-				ok!
 			end
 			def hello(name)
 				write "Hello #{name}"
-				ok!
 			end
 			def hello_all(first_name, *names)
 				write "Hello #{[first_name, *names].join(', ')}"
-				ok!
 			end
 		end.mock_request
 	end
@@ -36,4 +32,8 @@ describe Mojito::Controllers::Method do
 	it { subject.get('/hello_all/Fred/Barney').body.should == 'Hello Fred, Barney' }
 	it { subject.get('/hello_all/Fred/Barney/Wilma').body.should == 'Hello Fred, Barney, Wilma' }
 
+	it { subject.get('/hello_all').status.should == 404 }
+	
+	it { subject.get('/not_defined_method').status.should == 404 }
+	
 end
