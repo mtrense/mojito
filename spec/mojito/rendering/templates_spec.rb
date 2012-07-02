@@ -1,8 +1,10 @@
 # encoding: UTF-8
 require 'simplecov' and SimpleCov.start do
 	add_filter "spec/"
+	add_filter "lib/mojito/utils/rspec.rb"
 end
 require 'mojito'
+require 'mojito/utils/rspec'
 
 describe Mojito::Rendering::Templates do
 	
@@ -14,24 +16,32 @@ describe Mojito::Rendering::Templates do
 			end.mock_request
 		end
 		
-		it { subject.get('/').status.should == 200 }
-		it { subject.get('/').body.should == 'before middle inside the block after' }
+		it { subject.get('/').should respond_with(200, 'before middle inside the block after') }
 		
 	end
 	
 	context 'file templates' do
 		subject do
-			Mojito::C.runtime_controller Mojito::Rendering::Templates do
+			Mojito::C.runtime_controller Mojito::R::Templates do
 				template 'test.html.erb', :var => 'middle' do 'inside the block' end
 				halt!
 			end.mock_request
 		end
 		
-		it { subject.get('/').status.should == 200 }
-		it { subject.get('/').body.should == 'HTML file with a variable middle and a yield inside the block' }
-		it { subject.get('/').headers.should include('Content-Type') }
-		it { subject.get('/').headers['Content-Type'].should == 'text/html' }
+		it { subject.get('/').should respond_with(200, 'HTML file with a variable middle and a yield inside the block', 'Content-Type' => 'text/html') }
 		
+		context 'text template' do
+			subject do
+				Mojito::C.runtime_controller Mojito::R::Templates do
+					template 'test.txt.erb', :var => 'middle' do 'inside the block' end
+					halt!
+				end.mock_request
+			end
+			
+			it { subject.get('/').should respond_with(200, 'Text file with a variable middle and a yield inside the block', 'Content-Type' => 'text/plain') }
+			
+		end
+			
 	end
 
 end
