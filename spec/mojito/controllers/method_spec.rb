@@ -8,6 +8,21 @@ require 'mojito/utils/rspec'
 
 describe Mojito::Controllers::Method do
 	
+	context do
+		subject { Mojito::Controllers::Method }
+		
+		it { subject.args_for(0, '').should == [[], ''] }
+		it { subject.args_for(0, 'Fred/Barney').should == [[], 'Fred/Barney'] }
+		it { subject.args_for(1, 'Fred').should == [['Fred'], ''] }
+		it { subject.args_for(1, 'Fred/Barney').should == [['Fred'], 'Barney'] }
+		it { subject.args_for(2, 'Fred/Barney/Wilma').should == [['Fred', 'Barney'], 'Wilma'] }
+		it { subject.args_for(-1, 'Fred/Barney/Wilma').should == [['Fred', 'Barney', 'Wilma'], ''] }
+		it { subject.args_for(-1, '').should == [[], ''] }
+		it { subject.args_for(-2, '').should == [nil, ''] }
+		it { subject.args_for(-4, 'Fred/Barney').should == [nil, 'Fred/Barney'] }
+		
+	end
+	
 	subject do
 		Mojito::Controllers.method_controller(Mojito::Rendering) do
 			def test_method
@@ -23,8 +38,10 @@ describe Mojito::Controllers::Method do
 	end
 	
 	it { subject.get('/test_method').should respond_with(200, 'Test method') }
+	it { subject.get('/test_method/another_parameter').should respond_with(200, 'Test method') }
 	
 	it { subject.get('/hello/Fred').should respond_with(200, 'Hello Fred') }
+	it { subject.get('/hello/Fred/Barney').should respond_with(200, 'Hello Fred') }
 	
 	it { subject.get('/hello').should respond_with(404) }
 	
