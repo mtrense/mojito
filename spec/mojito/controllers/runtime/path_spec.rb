@@ -67,6 +67,7 @@ describe Mojito::Controllers::Runtime::Path do
 		end
 		
 		it { subject.get('/hello/Fred').should respond_with(200, 'Fred') }
+		it { subject.get('/hello/Fred+Flintstone').should respond_with(200, 'Fred Flintstone') }
 		it { subject.get('/hello/Fred/another/Barney').should respond_with(200, 'Barney') }
 		
 	end
