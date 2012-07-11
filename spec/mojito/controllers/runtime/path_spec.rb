@@ -66,10 +66,8 @@ describe Mojito::Controllers::Runtime::Path do
 			end.mock_request
 		end
 		
-		it { subject.get('/hello/Fred').status.should == 200 }
-		it { subject.get('/hello/Fred').body.should == 'Fred' }
-		it { subject.get('/hello/Fred/another/Barney').status.should == 200 }
-		it { subject.get('/hello/Fred/another/Barney').body.should == 'Barney' }
+		it { subject.get('/hello/Fred').should respond_with(200, 'Fred') }
+		it { subject.get('/hello/Fred/another/Barney').should respond_with(200, 'Barney') }
 		
 	end
 	
