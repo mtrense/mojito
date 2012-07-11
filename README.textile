@@ -15,11 +15,16 @@ p. The easiest way to start with mojito is to use a plain @config.ru@ script to 
 bc.. $ cat config.ru
 require 'mojito'
 
-FirstApp = Mojito.application do
-	on GET(), PATH('/hello/:name') do |name|
-		write "Hello #{name}! How are you?"
-		content_type :plain
-		ok!
+class FirstApp
+	include	 Mojito
+	include Mojito::C::Runtime
+	include Mojito::Rendering
+	routes do
+		on GET(), PATH('/hello/:name') do |name|
+			write "Hello #{name}! How are you?"
+			content_type :plain
+			ok!
+		end
 	end
 end
 
@@ -36,7 +41,13 @@ Hello Fred! How are you?
 
 p. Please be aware that although this way is easy to start with it tends to get messy very quick if your project becomes more complex, so please read on...
 
+h2. Controllers
+
+
+
 h2. Structure of a real-world application
+
+p. *This is not up-to-date*
 
 p. The above call to @Mojito.application@ actually created a class and included most of Mojitos foundation methods, so that you could start writing your application code without wondering what features you want to include in your application. As a tribute to simplicity (one of the most important I think), another helper method @Mojito.base_application@ can be used to create a blank application class, which only includes modules that are strictly necessary. Instead of using those methods you can also write out all of the generated classes code (here @Mojito@ is included, which in turn includes @Mojito::Base@, the basic module which is used by @Mojito.base_application@):
 
