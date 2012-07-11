@@ -3,6 +3,7 @@
 module Mojito::Controllers
 	
 	module Method
+		require 'cgi'
 		
 		def __dispatch
 			if m = %r{^/?(?<meth>\w+)(?:/|$)}.match(request.path_info)
@@ -11,6 +12,7 @@ module Mojito::Controllers
 					env['SCRIPT_NAME'] += m.to_s
 					arity = method(meth).arity
 					args, env['PATH_INFO'] = Method.args_for(arity, m.post_match)
+					args.collect! {|a| CGI.unescape a } if args
 					if args
 						send meth, *args
 						ok!

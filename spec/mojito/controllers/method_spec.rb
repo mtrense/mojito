@@ -41,6 +41,7 @@ describe Mojito::Controllers::Method do
 	it { subject.get('/test_method/another_parameter').should respond_with(200, 'Test method') }
 	
 	it { subject.get('/hello/Fred').should respond_with(200, 'Hello Fred') }
+	it { subject.get('/hello/Fred+Flintstone').should respond_with(200, 'Hello Fred Flintstone') }
 	it { subject.get('/hello/Fred/Barney').should respond_with(200, 'Hello Fred') }
 	
 	it { subject.get('/hello').should respond_with(404) }
