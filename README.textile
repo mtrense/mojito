@@ -15,7 +15,7 @@ p. The easiest way to start with mojito is to use a plain @config.ru@ script to 
 bc.. $ cat config.ru
 require 'mojito'
 
-FirstApp = Mojito::C.runtime_controller Mojito::C::Runtime, Mojito::Rendering do
+FirstApp = Mojito::Controllers.runtime_controller Mojito::Controllers::Runtime, Mojito::Rendering do
 	on GET(), PATH('/hello/:name') do |name|
 		write "Hello #{name}! How are you?"
 		content_type :plain
@@ -29,7 +29,7 @@ p. This installs a handler for GET requests to a path of /hello/ followed by a n
 
 bc. $ rackup
 
-p. This starts a http-server on port 9292. Now try to call your handler through curl:
+p. This starts a http-server on port 9292. Now try to call your handler with curl:
 
 bc. $ curl http://localhost:9292/hello/Fred
 Hello Fred! How are you?
@@ -37,6 +37,14 @@ Hello Fred! How are you?
 p. Please be aware that although this way is easy to start with it tends to get messy very quick if your project becomes more complex, so please read on...
 
 h2. Controllers
+
+The method call @Mojito::Controllers.runtime_controller@ actually created a new controller class. Every controller inherits from @Mojito::Base@ which contains a minimal set of methods that all controllers must have in common. Controller classes are actually Rack-Applications, so they must provide a (class-)method @call(env)@. The common sequence of processing a request includes:
+
+* @call(env)@ is called from the surrounding application/the framework
+* a new instance of the controller-class is instantiated and filled with the given environment
+* a kind of dispatch method (@__dispatch@ for build-in controllers) is called to do the actual work
+
+This ensures that the controller instance which handles a specific request is used solely for that request, so that any instance variables created during request-processing stay request-local. At the same time this keeps application stacking and nesting as simple as @call@-ing the next application
 
 
 
