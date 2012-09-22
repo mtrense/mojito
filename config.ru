@@ -5,7 +5,7 @@ require 'mojito'
 use Rack::ShowExceptions
 
 class MethodTest
-	include	 Mojito
+	include Mojito
 	include Mojito::C::Method
 	include Mojito::Rendering
 	
