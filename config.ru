@@ -17,7 +17,7 @@ class MethodTest
 end
 
 class TestApp	
-	include	 Mojito
+	include	Mojito
 	include Mojito::C::Runtime
 	include Mojito::Rendering
 	include Mojito::H::ExceptionHandling
