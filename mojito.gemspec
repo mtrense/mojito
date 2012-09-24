@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mojito"
-  s.version = "0.2.3"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Trense"]
-  s.date = "2012-07-11"
+  s.date = "2012-09-24"
   s.description = "A simple yet powerful webframework largely inspired by Rum and Cuba"
   s.email = "dev@trense.info"
   s.extra_rdoc_files = [
@@ -65,7 +65,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.0")
-  s.rubygems_version = "1.8.17"
+  s.rubygems_version = "1.8.24"
   s.summary = "A simple yet powerful webframework largely inspired by Rum and Cuba"
 
   if s.respond_to? :specification_version then
