@@ -22,16 +22,6 @@ module Mojito
 		module ExceptionHandling
 			
 			def self.included(type)
-				type.instance_exec do
-					old_call_with_handlers = method(:call_with_handlers)
-					define_method :call_with_handlers do
-						begin
-							old_call_with_handlers.bind(self).call
-						rescue Exception => e
-							__handle_error e
-						end
-					end
-				end
 				type.extend ClassMethods
 			end
 			

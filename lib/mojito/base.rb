@@ -63,16 +63,21 @@ module Mojito
 		def call(env)
 			catch :halt do
 				request = Rack::Request.new env
-				call_with_handlers request
+				dispatch request
 			end
 		end
 		
-		def call_with_handlers(request)
-			dispatch request
-		end
-		
 		def dispatch(request)
-			self.new(request).__dispatch
+			controller = self.new request
+			begin
+				controller.__dispatch
+			rescue Exception => e
+				if controller.respond_to? :__handle_error
+					controller.__handle_error(e)
+				else
+					raise e
+				end
+			end
 		end
 		
 	end
