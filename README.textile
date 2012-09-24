@@ -2,7 +2,7 @@ h1. mojito - Next level Ruby webframework
 
 p. Mojito is a lean and simple webframework. 
 
-p. As the name implies mojito derives from cuba (https://github.com/soveran/cuba). Many thanks to Michel and his cuba project for giving me some major insights on web-application-simplicity!
+p. As the name implies mojito derives from cuba (https://github.com/soveran/cuba). Many thanks to Michel and his cuba project for giving me some major insights on web-application-simplicity! See also https://github.com/mtrense/mojito-examples for more examples.
 
 h2. Installing
 
@@ -42,15 +42,15 @@ p. Please be aware that although this way is easy to start with it tends to get 
 
 h2. Controllers
 
-The method call @Mojito::Controllers.runtime_controller@ actually created a new controller class. Every controller inherits from @Mojito::Base@ which contains a minimal set of methods that all controllers must have in common. Controller classes are actually Rack-Applications, so they must provide a (class-)method @call(env)@. The common sequence of processing a request includes:
+Controllers are the common building blocks of Mojito Applications. For each successful request at least one controller is instantiated. The call to @controller :runtime@ actually defines the calling class as runtime controller and includes the corresponding module - Mojito::Controllers::Runtime in this case. For a specific class one can choose from many controller types, each of which is specialized to a specific use-case. 
+
+Controller classes are actually Rack-Applications, so they must provide a (class-)method @call(env)@. The common sequence of processing a request includes:
 
 * @call(env)@ is called from the surrounding application/the framework
-* a new instance of the controller-class is instantiated and filled with the given environment
+* a new instance of the controller-class is instantiated and configured with the given environment
 * a kind of dispatch method (@__dispatch@ for build-in controllers) is called to do the actual work
 
-This ensures that the controller instance which handles a specific request is used solely for that request, so that any instance variables created during request-processing stay request-local. At the same time this keeps application stacking and nesting as simple as @call@-ing the next application
-
-
+This ensures that the controller instance which handles a specific request is used solely for that request, so that any instance variables created during request-processing stay request-local. At the same time this keeps application stacking and nesting as simple as @call@-ing the next application.
 
 h2. Structure of a real-world application
 
