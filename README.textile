@@ -15,7 +15,11 @@ p. The easiest way to start with mojito is to use a plain @config.ru@ script to 
 bc.. $ cat config.ru
 require 'mojito'
 
-FirstApp = Mojito::Controllers.runtime_controller Mojito::Controllers::Runtime, Mojito::Rendering do
+class FirstApp
+	include Mojito
+	controller :runtime
+	rendering :all
+	
 	on GET(), PATH('/hello/:name') do |name|
 		write "Hello #{name}! How are you?"
 		content_type :plain

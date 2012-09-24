@@ -40,6 +40,26 @@ module Mojito
 			Rack::MockRequest.new self
 		end
 		
+		def controller(name, options = {})
+			mod = Mojito::Controllers.const_get name.to_s.camel_case.to_sym
+			include mod
+		end
+		
+		def helper(name, options = {})
+			mod = Mojito::Helpers.const_get name.to_s.camel_case.to_sym
+			include mod
+		end
+		
+		def rendering(name, options = {})
+			mod = case name
+			when :all
+				Mojito::Rendering
+			else
+				Mojito::Controllers.const_get name.to_s.camel_case.to_sym
+			end
+			include mod
+		end
+		
 	end
 
 end
