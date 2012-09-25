@@ -10,13 +10,14 @@ module Mojito
 			type.extend ClassMethods
 		end
 		
-		def initialize(request)
+		def initialize(request, options = {})
 			@__request = case request 
 			when Rack::Request
 				request.dup
 			when Hash, Mash
 				Rack::Request.new(request.dup)
 			end
+			@options = options
 			self.env['MOJITO/CONTEXT_PATH'] = self.env['SCRIPT_NAME']
 		end
 		

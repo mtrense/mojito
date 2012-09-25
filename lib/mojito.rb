@@ -55,7 +55,7 @@ module Mojito
 			when :all
 				Mojito::Rendering
 			else
-				Mojito::Controllers.const_get name.to_s.camel_case.to_sym
+				Mojito::Rendering.const_get name.to_s.camel_case.to_sym
 			end
 			include mod
 		end
