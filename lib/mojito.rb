@@ -42,6 +42,8 @@ module Mojito
 		
 		def controller(name, options = {})
 			mod = Mojito::Controllers.const_get name.to_s.camel_case.to_sym
+			[*options[:rendering]].each {|r| rendering r }
+			[*options[:helpers]].each {|h| helper h }
 			include mod
 		end
 		
