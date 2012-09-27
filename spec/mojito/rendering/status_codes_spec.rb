@@ -23,7 +23,5 @@ describe Mojito::Rendering::StatusCodes do
 	it { subject.get('/internal_server_error').status.should == 500 }
 	it { subject.get('/unavailable').status.should == 503 }
 	it { subject.get('/redirect').should respond_with(302, 'Location' => '/test') }
-#	it { subject.get('/redirect').status.should == 302 }
-#	it { subject.get('/redirect').headers['Location'].should == '/test' }
 	
 end
