@@ -15,9 +15,25 @@ module Mojito::Controllers
 		
 		module ClassMethods
 			
-			def type(t)
-				@type = t
+			def types
+				@types ||= {}
 			end
+			
+			def type(t, &block)
+				tc = TypeConfiguration.new t
+				tc.instance_exec &block if block
+				types[t] = tc
+			end
+			
+		end
+		
+		class TypeConfiguration
+			
+			def initialize(type)
+				@type = type
+			end
+			
+			
 			
 		end
 		
