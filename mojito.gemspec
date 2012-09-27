@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mojito"
-  s.version = "0.2.4"
+  s.version = "0.2.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Trense"]
-  s.date = "2012-09-24"
+  s.date = "2012-09-27"
   s.description = "A simple yet powerful webframework largely inspired by Rum and Cuba"
   s.email = "dev@trense.info"
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     "lib/mojito.rb",
     "lib/mojito/base.rb",
     "lib/mojito/controllers.rb",
+    "lib/mojito/controllers/entities.rb",
     "lib/mojito/controllers/method.rb",
     "lib/mojito/controllers/runtime.rb",
     "lib/mojito/controllers/runtime/environment.rb",
@@ -39,6 +40,7 @@ Gem::Specification.new do |s|
     "lib/mojito/rendering/content_types.rb",
     "lib/mojito/rendering/delegation.rb",
     "lib/mojito/rendering/file.rb",
+    "lib/mojito/rendering/markup.rb",
     "lib/mojito/rendering/status_codes.rb",
     "lib/mojito/rendering/templates.rb",
     "lib/mojito/request_extensions.rb",
@@ -76,6 +78,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<mime-types>, ["~> 1.18"])
       s.add_runtime_dependency(%q<tilt>, ["~> 1.3.3"])
       s.add_runtime_dependency(%q<extlib>, ["~> 0.9.15"])
+      s.add_runtime_dependency(%q<json_builder>, ["~> 3.1.7"])
       s.add_runtime_dependency(%q<where-am-i>, ["~> 1.0.0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
@@ -87,6 +90,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mime-types>, ["~> 1.18"])
       s.add_dependency(%q<tilt>, ["~> 1.3.3"])
       s.add_dependency(%q<extlib>, ["~> 0.9.15"])
+      s.add_dependency(%q<json_builder>, ["~> 3.1.7"])
       s.add_dependency(%q<where-am-i>, ["~> 1.0.0"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
@@ -99,6 +103,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mime-types>, ["~> 1.18"])
     s.add_dependency(%q<tilt>, ["~> 1.3.3"])
     s.add_dependency(%q<extlib>, ["~> 0.9.15"])
+    s.add_dependency(%q<json_builder>, ["~> 3.1.7"])
     s.add_dependency(%q<where-am-i>, ["~> 1.0.0"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
