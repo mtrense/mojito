@@ -4,24 +4,13 @@ module Mojito::Rendering
 	
 	module StatusCodes
 		
-		def ok!
-			response.status = 200
-			halt!
-		end
-		
-		def not_found!
-			response.status = 404
-			halt!
-		end
-		
-		def internal_server_error!
-			response.status = 500
-			halt!
-		end
-		
-		def unavailable!
-			response.status = 503
-			halt!
+		%W[ok not_found unauthorized internal_server_error service_unavailable].each do |status|
+			eval <<-EVAL
+			def #{status}!
+				response.status = #{Mojito::STATUS[status.to_sym].code}
+				halt!
+			end
+			EVAL
 		end
 		
 		def redirect(target, status = 302)
