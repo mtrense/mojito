@@ -18,6 +18,7 @@ Jeweler::Tasks.new do |gem|
 	gem.add_dependency 'mime-types', '~> 1.18'
 	gem.add_dependency 'tilt', '~> 1.3.3'
 	gem.add_dependency 'extlib', '~> 0.9.15'
+	gem.add_dependency 'json_builder', '~> 3.1.7'
 	gem.add_dependency 'where-am-i', '~> 1.0.0'
 	gem.add_development_dependency "rspec", "~> 2.8.0"
 	gem.add_development_dependency "rdoc", "~> 3.12"

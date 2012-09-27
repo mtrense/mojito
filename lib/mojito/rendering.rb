@@ -6,6 +6,7 @@ module Mojito::Rendering
 	require 'mojito/rendering/content_types'
 	require 'mojito/rendering/delegation'
 	require 'mojito/rendering/file'
+	require 'mojito/rendering/markup'
 	require 'mojito/rendering/status_codes'
 	require 'mojito/rendering/templates'
 	
@@ -15,6 +16,7 @@ module Mojito::Rendering
 			include ContentTypes
 			include Delegation
 			include File
+			include Markup
 			include StatusCodes
 			include Templates
 		end
