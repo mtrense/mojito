@@ -2,6 +2,7 @@
 
 module Mojito::Rendering
 	
+	require 'mojito/rendering/cache'
 	require 'mojito/rendering/content'
 	require 'mojito/rendering/content_types'
 	require 'mojito/rendering/delegation'
@@ -12,6 +13,7 @@ module Mojito::Rendering
 	
 	def self.included(type)
 		type.instance_exec do
+			include Cache
 			include Content
 			include ContentTypes
 			include Delegation
