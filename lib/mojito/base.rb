@@ -62,10 +62,15 @@ module Mojito
 	module ClassMethods
 		
 		def call(env)
-			catch :halt do
+			response = catch :halt do
 				request = Rack::Request.new env
 				dispatch request
 			end
+			headers = response[1]
+			headers.each do |name, value|
+				headers[name] = value.to_s unless String === value
+			end
+			response
 		end
 		
 		def dispatch(request)
