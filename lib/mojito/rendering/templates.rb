@@ -7,6 +7,9 @@ module Mojito::Rendering
 		require 'where'
 		require 'mime/types'
 		
+		## Render a given template
+		# template_to_string(file, [locals])
+		# template_to_string(type, inline, [locals])
 		def template(*args, &block)
 			locals = Hash === args.last ? args.pop : self.request.locals
 			template = if args.size == 2
@@ -19,7 +22,7 @@ module Mojito::Rendering
 				end
 				Tilt[file.to_s].new file.to_s
 			end
-			response.write template.render(self, locals, &block)
+			template.render(self, locals, &block)
 		end
 		
 	end

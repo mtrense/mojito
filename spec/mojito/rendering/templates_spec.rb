@@ -10,8 +10,8 @@ describe Mojito::Rendering::Templates do
 	
 	context 'inline templates' do
 		subject do
-			Mojito::C.runtime_controller Mojito::Rendering::Templates do
-				template :erb, 'before <%= var %> <%= yield %> after', :var => 'middle' do 'inside the block' end
+			Mojito::C.runtime_controller Mojito::R::Content, Mojito::R::Templates do
+				write template(:erb, 'before <%= var %> <%= yield %> after', :var => 'middle') { 'inside the block' }
 				halt!
 			end.mock_request
 		end
@@ -22,8 +22,8 @@ describe Mojito::Rendering::Templates do
 	
 	context 'file templates' do
 		subject do
-			Mojito::C.runtime_controller Mojito::R::Templates do
-				template 'test.html.erb', :var => 'middle' do 'inside the block' end
+			Mojito::C.runtime_controller Mojito::R::Content, Mojito::R::Templates do
+				write template('test.html.erb', :var => 'middle') { 'inside the block' }
 				halt!
 			end.mock_request
 		end
@@ -32,8 +32,8 @@ describe Mojito::Rendering::Templates do
 		
 		context 'text template' do
 			subject do
-				Mojito::C.runtime_controller Mojito::R::Templates do
-					template 'test.txt.erb', :var => 'middle' do 'inside the block' end
+				Mojito::C.runtime_controller Mojito::R::Content, Mojito::R::Templates do
+					write template('test.txt.erb', :var => 'middle') { 'inside the block' }
 					halt!
 				end.mock_request
 			end
