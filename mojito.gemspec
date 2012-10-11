@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mojito"
-  s.version = "0.2.6"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Trense"]
-  s.date = "2012-09-27"
+  s.date = "2012-10-11"
   s.description = "A simple yet powerful webframework largely inspired by Rum and Cuba"
   s.email = "dev@trense.info"
   s.extra_rdoc_files = [
@@ -33,9 +33,11 @@ Gem::Specification.new do |s|
     "lib/mojito/controllers/runtime/virtual_host.rb",
     "lib/mojito/controllers/sinatra.rb",
     "lib/mojito/helpers.rb",
+    "lib/mojito/helpers/escape.rb",
     "lib/mojito/helpers/exception_handling.rb",
     "lib/mojito/helpers/shortcuts.rb",
     "lib/mojito/rendering.rb",
+    "lib/mojito/rendering/cache.rb",
     "lib/mojito/rendering/content.rb",
     "lib/mojito/rendering/content_types.rb",
     "lib/mojito/rendering/delegation.rb",
