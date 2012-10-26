@@ -29,6 +29,17 @@ describe Mojito do
 	end
 	
 	context do
+		before { ENV['RACK_ENV'] = 'development:my_mode:publish' }
+		subject { Mojito }
+		it { subject.mode.should == :development }
+		it do
+			subject.modes.should include(:development)
+			subject.modes.should include(:publish)
+			subject.modes.should include(:my_mode)
+		end
+	end
+	
+	context do
 		subject do
 			Mojito::C.runtime_controller do
 				

@@ -1,6 +1,7 @@
 # encoding: UTF-8
 require 'rack'
 require 'extlib'
+require 'set'
 
 module Mojito
 	
@@ -25,11 +26,15 @@ module Mojito
 		end
 		
 		def mode
-			(ENV['RACK_ENV'] || :development).to_sym
+			modes.first
 		end
-	
+		
+		def modes
+			(ENV['RACK_ENV'] || 'development').split(':').collect(&:to_sym).to_set
+		end
+		
 		def development?
-			mode == :development
+			modes.include? :development
 		end
 		
 	end
