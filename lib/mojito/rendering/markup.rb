@@ -6,7 +6,7 @@ module Mojito::Rendering
 		require 'json_builder'
 		
 		def generate_json(&block)
-			response.write JSONBuilder::Compiler.generate(&block)
+			JSONBuilder::Compiler.generate(&block)
 		end
 		
 	end
