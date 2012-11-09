@@ -8,6 +8,8 @@ module Mojito::Rendering
 			response.write content
 		end
 		
+		alias :<< :write
+		
 		def render_as(type, content, *args)
 			renderer = "to_#{type}".to_sym
 			if content.respond_to? renderer
